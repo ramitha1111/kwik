@@ -13,5 +13,10 @@ jobs:
         java-version: 17
         distribution: semeru
     - uses: gradle/actions/setup-gradle@v5
+    - name: Cache Gradle dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.gradle/caches
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
     - run: ./gradlew --version
     - run: ./gradlew build
